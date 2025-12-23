@@ -20,8 +20,33 @@ This repository contains Python scripts demonstrating how to use Google's Gemini
 -   `check_file_stores.py`: Shows how to create, list, get details of, and delete a File Search Store.
 -   `delete_file_stores.py`: A utility script to list and delete *all* existing File Search Stores associated with your project. **Use with caution.**
 -   `sample.txt`: A sample text file used by `file_search.py` for demonstration purposes.
+-   `streamlit_app.py`: A full-featured web interface to manage your File Search stores, upload documents (with chunking configuration), and chat with your data using citations.
 
-## Usage
+## Streamlit Web App (Recommended)
+
+The easiest way to interact with Gemini File Search is through the included Streamlit app.
+
+### Features
+-   **Visual Store Management**: Create, view, and delete file stores.
+-   **Easy Uploads**: Drag & drop file uploads with progress tracking.
+-   **Advanced Chunking**: Configure chunk size and overlap for your documents during upload.
+-   **Interactive Chat**: Query your document stores and receive answers with **citations** (including text excerpts and metadata).
+-   **Secure**: API Key is handled securely via environment variables or session input.
+
+### How to Run
+1.  Ensure you have the requirements installed:
+    ```powershell
+    pip install -r requirements.txt
+    ```
+2.  Run the app:
+    ```powershell
+    streamlit run streamlit_app.py
+    ```
+3.  The app will open in your browser. If you don't have `GOOGLE_API_KEY` set in your environment (`.env`), you will be prompted to enter it in the sidebar.
+
+## CLI Scripts Usage
+
+If you prefer using command-line scripts:
 
 1.  **Prepare your data**: Ensure `sample.txt` exists or replace it with your own text file.
 2.  **Run the search demo**:
@@ -38,7 +63,8 @@ This repository contains Python scripts demonstrating how to use Google's Gemini
     python delete_file_stores.py
     ```
 
-## Notes
+## Safety & Security
 
--   The `genai.Client()` automatically looks for the `GOOGLE_API_KEY` environment variable.
--   File Search Stores are persistent. Remember to clean them up if they are no longer needed to avoid clutter or potential costs.
+-   **API Keys**: Never commit your `.env` file or hardcode your API key. The `.gitignore` is set up to exclude `.env` and Python virtual environments.
+-   **Data Privacy**: Files uploaded to Gemini File Search are stored by Google. Please refer to Google's data privacy policies regarding the Gemini API.
+-   **Clean Up**: File Search stores are persistent. Use the app or `delete_file_stores.py` to remove data when you are done to avoid confusing overlap or unnecessary storage.
